@@ -1,16 +1,18 @@
 "use strict";
 
+(() => {
+
 const isArr = o => Array.isArray(o)
 const isFunc = o => typeof o === "function"
 const isStr = o => typeof o === "string"
 
 let apps = new Map()
 
-export const app = (name, mountFn) => { apps.set(name.toLowerCase(), mountFn) } // store mapping name -> func (hostNode, parentNode) => ()
+const app = (name, mountFn) => { apps.set(name.toLowerCase(), mountFn) } // store mapping name -> func (hostNode, parentNode) => ()
 const getApp = name => apps.get(name?.toLowerCase()) // return the mount function
-export const mount = (hostNode, parentNode) => getApp(hostNode.tagName)(hostNode, parentNode) // get and call mount 
+const mount = (hostNode, parentNode) => getApp(hostNode.tagName)(hostNode, parentNode) // get and call mount 
 
-export const DispatchEvent = (node, eventName, ...payload) => {
+const DispatchEvent = (node, eventName, ...payload) => {
   let event = new CustomEvent(eventName, { detail: { _args_: payload } })
   return () => { node.dispatchEvent(event) }
 }
@@ -362,7 +364,7 @@ const quikAppMount = (hostNode, parentNode, getConf) => {
   }
 }
 
-export const quikApp = (name, getConf) => {
+const quikApp = (name, getConf) => {
   const mountFn = (hostNode, parentNode) => quikAppMount(hostNode, parentNode, getConf) 
   app(name, mountFn)
   return mount
@@ -383,7 +385,7 @@ const PROPVALSTR = 9
 
 const ws = (c) => c == ' ' || c == '\t' || c == '\n' || c == '\r'
 
-export const H = (strs, ...vals) => {
+const H = (strs, ...vals) => {
   let tagname,
     propname,
     props,
@@ -606,4 +608,7 @@ const equal = (a, b) => {
   return a !== a && b !== b;
 }
 
-window.QuickApp = { app, mount, quikApp, H, DispatchEvent } 
+
+  window.QuickApp = { app, mount, quikApp, H, DispatchEvent } 
+
+})()
