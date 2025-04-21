@@ -606,3 +606,4 @@ const equal = (a, b) => {
   return a !== a && b !== b;
 }
 
+window.QuickApp = { app, mount, quikApp, H, DispatchEvent } 
