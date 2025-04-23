@@ -15,7 +15,7 @@ const mount = (hostNode, parentNode) => getApp(hostNode.tagName)(hostNode, paren
 
 const DispatchEvent = (node, eventName, ...payload) => {
   let event = new CustomEvent(eventName, { detail: { _args_: payload } })
-  return () => { node.dispatchEvent(event) }
+  node.dispatchEvent(event)
 }
 
 const createClass = obj => {
@@ -225,8 +225,8 @@ const patch = (parent, node, oldVNode, newVNode, listener, isSvg, isRoot) => {
 const listener = (dispatch, event) => {
   let action = event.target._events[event.type]
   if (!isArr(action)) action = [action]
-  if (event.detail?._args_) action = action.concat(...event.detail._args_)
   action = action.concat([event])
+  if (event.detail?._args_) action = action.concat(...event.detail._args_)
   dispatch(action)
 }
 
