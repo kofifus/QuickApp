@@ -1,4 +1,5 @@
 "use strict";
+// uglifyjs quikapp.js  -c --mangle-props reserved=['QuikApp','quikApp','app','mount','quickApp','H','DispatchEvent','view','dispatch','methods','destroy','hostNode','parentNode','dispatch','publishAtom','subscribeAtom','unpublishAtom','unsubscribeAtom'] -o quikapp.min.js
 
 (() => {
 
@@ -609,6 +610,6 @@ const equal = (a, b) => {
 }
 
 
-  window.QuickApp = { app, mount, quikApp, H, DispatchEvent } 
+  window.QuikApp = { app, mount, quikApp, H, DispatchEvent } 
 
 })()
